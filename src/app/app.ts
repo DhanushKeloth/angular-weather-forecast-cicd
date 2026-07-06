@@ -4,7 +4,7 @@ import { Weather } from "./weather/weather";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Weather],
+  imports: [ Weather],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
