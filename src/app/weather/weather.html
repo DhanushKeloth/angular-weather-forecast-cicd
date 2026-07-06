@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="header-actions">
+    <h2>Weather Forecast Dashboard</h2>
+    <button class="btn-refresh" (click)="fetchWeatherData()" [disabled]="isLoading">
+      {{ isLoading ? 'Refreshing...' : 'Refresh Data' }}
+    </button>
+  </div>
+
+  <div *ngIf="isLoading" class="loading-state">
+    <p>Loading weather records...</p>
+  </div>
+
+  <div *ngIf="errorMessage" class="error-state">
+    <p>{{ errorMessage }}</p>
+  </div>
+
+  <div *ngIf="!isLoading && !errorMessage">
+    <p class="record-count">Total Forecast Records: <strong>{{ forecasts.length }}</strong></p>
+
+    <div class="table-responsive">
+      <table class="weather-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Temperature (°C)</th>
+            <th>Temperature (°F)</th>
+            <th>Summary</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let forecast of forecasts"
+    [ngClass]="{'hot-row': forecast.temperatureC > 30}">
+  <td>{{ forecast.date | date:'longDate' }}</td>
+  <td>{{ forecast.temperatureC }}°C</td>
+  <td>{{ forecast.temperatureF }}°F</td>
+  <td>{{ forecast.summary }}</td>
+</tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
